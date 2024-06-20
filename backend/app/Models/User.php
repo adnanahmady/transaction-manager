@@ -12,15 +12,28 @@ class User extends Authenticatable
     use HasFactory;
     use Notifiable;
 
+    public const TABLE = 'users';
+    public const PRIMARY_KEY = 'id';
+    public const NAME = 'name';
+    public const EMAIL = 'email';
+    public const PASSWORD = 'password';
+    public const PHONE_NUMBER = 'phone_number';
+    public const REMEMBER_TOKEN = 'remember_token';
+    public const EMAIL_VERIFIED_AT = 'email_verified_at';
+
+    protected $table = self::TABLE;
+    protected $primaryKey = self::PRIMARY_KEY;
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        self::NAME,
+        self::EMAIL,
+        self::PHONE_NUMBER,
+        self::PASSWORD,
     ];
 
     /**
@@ -29,8 +42,8 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
-        'remember_token',
+        self::PASSWORD,
+        self::REMEMBER_TOKEN,
     ];
 
     /**
@@ -41,8 +54,8 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
+            self::EMAIL_VERIFIED_AT => 'datetime',
+            self::PASSWORD => 'hashed',
         ];
     }
 }
