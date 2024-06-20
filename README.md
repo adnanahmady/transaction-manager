@@ -9,6 +9,8 @@ using this app.
 Using bellow list you can jump to different
 parts of the application.
 
+* [Requirements](#requirements)
+* [Commit Message Manual](#commit-message-manual)
 * [Make Commands](#make-commands)
   * [Up](#up)
   * [Down](#down)
@@ -20,6 +22,20 @@ parts of the application.
   * [Following Logs](#following-logs)
   * [Status](#status)
   * [Run Application Tests](#application-tests)
+
+# Requirements
+
+This projects uses `docker`, `docker compose`, and the `make` tools
+to maintain the development environment.
+
+# Commit Message Manual
+
+The following phrases are in use to perform good commit messages.
+
+* **Added**: the commit contains a feature on the application, like an api is added.
+* **Modified**: the commit contains changes, these changes are not bugs,
+  like lazy loading is improved.
+* **Fixed**: the commit fixes a bug on the application.
 
 # Make Commands
 
@@ -55,7 +71,7 @@ make up up-as="--user root"
 
 Currently the project brings up the environment on
 detach mode, but you can change it, for example you
-may want to remove abandand containers too, like bellow.
+may want to remove orphan containers too, like bellow.
 
 ```shell
 make up up-with="-d --remove-orphans"
