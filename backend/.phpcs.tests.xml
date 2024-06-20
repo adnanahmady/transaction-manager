@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ruleset name="CodeSniffer for tests">
+    <arg name="encoding" value="UTF-8" />
+    <file>tests</file>
+    <include-pattern>.*/Tests/.*</include-pattern>
+    <rule ref="Squiz.WhiteSpace.FunctionSpacing">
+        <exclude name="Squiz.WhiteSpace.FunctionSpacing.BeforeFirst" />
+        <exclude name="Squiz.WhiteSpace.FunctionSpacing.AfterLast" />
+        <properties>
+            <property name="spacing" value="1" />
+        </properties>
+    </rule>
+</ruleset>
