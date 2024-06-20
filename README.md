@@ -22,6 +22,7 @@ parts of the application.
   * [Following Logs](#following-logs)
   * [Status](#status)
   * [Run Application Tests](#application-tests)
+* [Database Diagram](#database-diagram)
 
 # Requirements
 
@@ -211,3 +212,9 @@ You can run whole written tests of the application using this command.
 ```shell
 make test
 ```
+
+# Database Diagram
+
+You can look at the implemented database diagram in bellow.
+
+![Database Diagram](.assets/transaction-manager.jpg)
