@@ -30,7 +30,7 @@ class UserFactory extends Factory
             User::EMAIL_VERIFIED_AT => now(),
             User::PHONE_NUMBER => $this->faker->numberBetween(
                 9_000_000_000,
-                9_999_999_999
+                9_999_999_999,
             ),
             User::PASSWORD => static::$password ??= Hash::make('password'),
             User::REMEMBER_TOKEN => Str::random(10),
