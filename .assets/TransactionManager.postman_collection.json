@@ -1,0 +1,209 @@
+{
+	"info": {
+		"_postman_id": "525224d6-6cfd-4157-95e6-6ab67fa00d75",
+		"name": "TransactionManager",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1911426"
+	},
+	"item": [
+		{
+			"name": "TransferMoney",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"sender_card_number\": \"6221-0683-0971-6292\",\n    \"receiver_card_number\": \"6219-8636-2613-7901\",\n    \"amount\": 34000\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost/api/v1/transactions",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"v1",
+						"transactions"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "TransferMoney",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"sender_card_number\": \"6221-0683-0971-6292\",\n    \"receiver_card_number\": \"6219-8636-2613-7901\",\n    \"amount\": 34000\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost/api/v1/transactions",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"v1",
+								"transactions"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.21.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.3.2"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 21 Jun 2024 19:23:58 GMT"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"id\": 7,\n        \"sender_card_number\": \"6221-0683-0971-6292\",\n        \"receiver_card_number\": \"6219-8636-2613-7901\",\n        \"amount\": 29000,\n        \"status\": \"success\",\n        \"fee\": 5000,\n        \"created_at\": \"2024-06-21 19:23:58\"\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "UsersWithMostTransaction",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "localhost/api/v1/users",
+					"host": [
+						"localhost"
+					],
+					"path": [
+						"api",
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "UsersWithMostTransaction",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost/api/v1/users",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"v1",
+								"users"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx/1.21.6"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.3.2"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 21 Jun 2024 19:21:54 GMT"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": [\n        {\n            \"id\": 1,\n            \"name\": \"Everette Schmeler Sr.\",\n            \"email\": \"kwisoky@example.com\",\n            \"phone_nubmer\": \"09309616418\",\n            \"transactions\": [\n                {\n                    \"id\": 1,\n                    \"sender_card_number\": \"6221-0683-0971-6292\",\n                    \"receiver_card_number\": \"6219-8636-2613-7901\",\n                    \"amount\": 29000,\n                    \"status\": \"success\",\n                    \"fee\": 5000,\n                    \"created_at\": \"2024-06-21 19:15:31\"\n                },\n                {\n                    \"id\": 2,\n                    \"sender_card_number\": \"6221-0683-0971-6292\",\n                    \"receiver_card_number\": \"6219-8636-2613-7901\",\n                    \"amount\": 29000,\n                    \"status\": \"success\",\n                    \"fee\": 5000,\n                    \"created_at\": \"2024-06-21 19:16:23\"\n                },\n                {\n                    \"id\": 3,\n                    \"sender_card_number\": \"6221-0683-0971-6292\",\n                    \"receiver_card_number\": \"6219-8636-2613-7901\",\n                    \"amount\": 29000,\n                    \"status\": \"success\",\n                    \"fee\": 5000,\n                    \"created_at\": \"2024-06-21 19:16:30\"\n                },\n                {\n                    \"id\": 4,\n                    \"sender_card_number\": \"6221-0683-0971-6292\",\n                    \"receiver_card_number\": \"6219-8636-2613-7901\",\n                    \"amount\": 29000,\n                    \"status\": \"success\",\n                    \"fee\": 5000,\n                    \"created_at\": \"2024-06-21 19:17:22\"\n                },\n                {\n                    \"id\": 5,\n                    \"sender_card_number\": \"6221-0683-0971-6292\",\n                    \"receiver_card_number\": \"6219-8636-2613-7901\",\n                    \"amount\": 29000,\n                    \"status\": \"success\",\n                    \"fee\": 5000,\n                    \"created_at\": \"2024-06-21 19:19:02\"\n                },\n                {\n                    \"id\": 6,\n                    \"sender_card_number\": \"6221-0683-0971-6292\",\n                    \"receiver_card_number\": \"6219-8636-2613-7901\",\n                    \"amount\": 29000,\n                    \"status\": \"success\",\n                    \"fee\": 5000,\n                    \"created_at\": \"2024-06-21 19:19:38\"\n                }\n            ]\n        },\n        {\n            \"id\": 2,\n            \"name\": \"Mrs. Maegan Wisozk III\",\n            \"email\": \"jesus88@example.org\",\n            \"phone_nubmer\": \"09187701393\",\n            \"transactions\": [\n                {\n                    \"id\": 1,\n                    \"sender_card_number\": \"6221-0683-0971-6292\",\n                    \"receiver_card_number\": \"6219-8636-2613-7901\",\n                    \"amount\": 29000,\n                    \"status\": \"success\",\n                    \"fee\": 5000,\n                    \"created_at\": \"2024-06-21 19:15:31\"\n                },\n                {\n                    \"id\": 2,\n                    \"sender_card_number\": \"6221-0683-0971-6292\",\n                    \"receiver_card_number\": \"6219-8636-2613-7901\",\n                    \"amount\": 29000,\n                    \"status\": \"success\",\n                    \"fee\": 5000,\n                    \"created_at\": \"2024-06-21 19:16:23\"\n                },\n                {\n                    \"id\": 3,\n                    \"sender_card_number\": \"6221-0683-0971-6292\",\n                    \"receiver_card_number\": \"6219-8636-2613-7901\",\n                    \"amount\": 29000,\n                    \"status\": \"success\",\n                    \"fee\": 5000,\n                    \"created_at\": \"2024-06-21 19:16:30\"\n                },\n                {\n                    \"id\": 4,\n                    \"sender_card_number\": \"6221-0683-0971-6292\",\n                    \"receiver_card_number\": \"6219-8636-2613-7901\",\n                    \"amount\": 29000,\n                    \"status\": \"success\",\n                    \"fee\": 5000,\n                    \"created_at\": \"2024-06-21 19:17:22\"\n                },\n                {\n                    \"id\": 5,\n                    \"sender_card_number\": \"6221-0683-0971-6292\",\n                    \"receiver_card_number\": \"6219-8636-2613-7901\",\n                    \"amount\": 29000,\n                    \"status\": \"success\",\n                    \"fee\": 5000,\n                    \"created_at\": \"2024-06-21 19:19:02\"\n                },\n                {\n                    \"id\": 6,\n                    \"sender_card_number\": \"6221-0683-0971-6292\",\n                    \"receiver_card_number\": \"6219-8636-2613-7901\",\n                    \"amount\": 29000,\n                    \"status\": \"success\",\n                    \"fee\": 5000,\n                    \"created_at\": \"2024-06-21 19:19:38\"\n                }\n            ]\n        }\n    ]\n}"
+				}
+			]
+		}
+	]
+}

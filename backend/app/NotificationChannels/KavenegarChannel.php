@@ -14,15 +14,11 @@ class KavenegarChannel implements SmsChannelInterface
         /** @var SmsMessageInterface $message */
         $message = $notification->toSms($notifiable);
 
-        $sms = (new KavenegarApi(config('sms.kavenegar.key')))
+        (new KavenegarApi(config('sms.kavenegar.key')))
             ->send(
                 $message->getLineNumber(),
                 $message->getReceptor(),
                 $message->getContent(),
             );
-
-        if ($sms->result->code === 200) {
-            $notifiable->notificationMessaged($notification->id);
-        }
     }
 }

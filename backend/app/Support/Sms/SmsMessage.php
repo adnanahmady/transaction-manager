@@ -2,7 +2,7 @@
 
 namespace App\Support\Sms;
 
-class KavenegarMessage implements SmsMessageInterface
+class SmsMessage implements SmsMessageInterface
 {
     /**
      * If receptor is not set, then message wouldn't
@@ -96,6 +96,10 @@ class KavenegarMessage implements SmsMessageInterface
      */
     public function getLineNumber(): string
     {
-        return $this->lineNumber ?? config('sms.kavenegar.line_number');
+        return $this->lineNumber ?? config(
+            'sms.' .
+            config('sms.channel.default') .
+            '.line_number',
+        );
     }
 }

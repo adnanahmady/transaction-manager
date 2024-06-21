@@ -23,6 +23,7 @@ parts of the application.
   * [Status](#status)
   * [Run Application Tests](#application-tests)
 * [Database Diagram](#database-diagram)
+* [Postman Collection](#postman-collection)
 
 # Requirements
 
@@ -218,3 +219,9 @@ make test
 You can look at the implemented database diagram in bellow.
 
 ![Database Diagram](.assets/transaction-manager.jpg)
+
+# Postman Collection
+
+You can try the services by importing and using this postman collection.
+
+[Postman Collection](.assets/TransactionManager.postman_collection.json)

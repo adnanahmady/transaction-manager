@@ -9,7 +9,7 @@ class SmsChannel implements SmsChannelInterface
 {
     public function send(User $notifiable, SmsNotification $notification): void
     {
-        $class = config('sms.channel.default');
+        $class = config('sms.channels.' . config('sms.channel.default'));
 
         /** @var SmsChannelInterface $channel */
         $channel = new $class();
