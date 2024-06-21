@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class CreditCard extends Model
@@ -41,5 +42,10 @@ class CreditCard extends Model
             Transaction::RECEIVER_CARD,
             self::NUMBER,
         );
+    }
+
+    public function account(): BelongsTo
+    {
+        return $this->belongsTo(Account::class, self::ACCOUNT);
     }
 }

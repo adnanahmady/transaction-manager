@@ -3,9 +3,13 @@
 namespace Tests\Feature\Transaction;
 
 use App\Enums\TransactionStatus;
+use App\Models\CreditCard;
 use App\Models\Transaction;
+use App\Notifications\TransactionSucceedNotification;
 use App\Support\Numbers\NumberTranslator;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Bus;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Testing\Fluent\AssertableJson;
 use PHPUnit\Framework\Attributes\DataProvider;
 use Tests\TestCase;
@@ -13,6 +17,30 @@ use Tests\TestCase;
 class TransferMoneyTest extends TestCase
 {
     use RefreshDatabase;
+
+    public function test_after_transmission_an_sms_should_get_send_to_transaction_parties(): void
+    {
+        $this->withoutExceptionHandling();
+        Bus::fake();
+        Notification::fake();
+        $sender = CreditCard::factory()->create();
+        $receiver = CreditCard::factory()->create();
+        $data = [
+            'sender_card_number' => $sender->number,
+            'receiver_card_number' => $receiver->number,
+            'amount' => 20_000,
+        ];
+
+        $this->postJson(
+            uri: route('api.v1.transactions.transfer'),
+            data: $data,
+        );
+
+        Notification::assertSentTimes(
+            TransactionSucceedNotification::class,
+            2,
+        );
+    }
 
     public function test_the_response_data_should_be_as_expected(): void
     {

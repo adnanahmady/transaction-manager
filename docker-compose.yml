@@ -14,6 +14,14 @@ x-postgres: &db-postgres-settings
     POSTGRES_USER: ${DB_USERNAME:-admin}
     POSTGRES_PASSWORD: ${DB_PASSWORD:-secret}
 
+x-db-connection: &db-connection-setting
+  DB_CONNECTION: ${DB_CONNECTION:-pgsql}
+  DB_HOST: ${DB_HOST:-database}
+  DB_PORT: ${DB_PORT:-5432}
+  DB_DATABASE: ${DB_DATABASE:-database}
+  DB_USERNAME: ${DB_USERNAME:-admin}
+  DB_PASSWORD: ${DB_PASSWORD:-secret}
+
 services:
   web:
     image: nginx:1.21-alpine
@@ -43,12 +51,22 @@ services:
       - database
     environment:
       HISTFILE: /home/docker/.history
-      DB_CONNECTION: ${DB_CONNECTION:-pgsql}
-      DB_HOST: ${DB_HOST:-database}
-      DB_PORT: ${DB_PORT:-5432}
-      DB_DATABASE: ${DB_DATABASE:-database}
-      DB_USERNAME: ${DB_USERNAME:-admin}
-      DB_PASSWORD: ${DB_PASSWORD:-secret}
+      <<: *db-connection-setting
+
+  worker:
+    build:
+      context: .backend/config
+      dockerfile: Dockerfile
+    <<: *restart_policy
+    command: bash -c "php artisan queue:work"
+    working_dir: /backend
+    tty: true
+    volumes:
+      - ./backend:/backend
+    links:
+      - database
+    environment:
+      <<: *db-connection-setting
 
   database:
     <<: *db-postgres-settings

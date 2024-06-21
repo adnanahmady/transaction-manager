@@ -114,4 +114,32 @@ class Transaction extends Model
             ->where(User::TABLE . '.' . User::PRIMARY_KEY, $user->getKey())
             ->limit(10);
     }
+
+    public function findSender(): ?User
+    {
+        $creditCard = CreditCard::where(
+            'number',
+            $this->{self::SENDER_CARD},
+        )->first();
+
+        if (!$creditCard) {
+            return null;
+        }
+
+        return $creditCard->account->owner;
+    }
+
+    public function findReceiver(): ?User
+    {
+        $creditCard = CreditCard::where(
+            'number',
+            $this->{self::RECEIVER_CARD},
+        )->first();
+
+        if (!$creditCard) {
+            return null;
+        }
+
+        return $creditCard->account->owner;
+    }
 }

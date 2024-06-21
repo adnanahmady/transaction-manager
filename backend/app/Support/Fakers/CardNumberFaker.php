@@ -15,7 +15,6 @@ class CardNumberFaker
             ) . $this->randomNumeric(to: 99),
             $this->randomNumeric(),
             $this->randomNumeric(),
-            $this->randomNumeric(),
         ]);
     }
 
@@ -23,7 +22,7 @@ class CardNumberFaker
     {
         return str_pad(
             fake()->numberBetween(0, $to),
-            4,
+            strlen($to),
             '0',
             STR_PAD_LEFT,
         );
