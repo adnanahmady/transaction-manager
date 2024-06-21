@@ -3,9 +3,14 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Illuminate\Database\Query\JoinClause;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 
 class User extends Authenticatable
 {
@@ -57,5 +62,67 @@ class User extends Authenticatable
             self::EMAIL_VERIFIED_AT => 'datetime',
             self::PASSWORD => 'hashed',
         ];
+    }
+
+    public function accounts(): HasMany
+    {
+        return $this->hasMany(Account::class, Account::OWNER);
+    }
+
+    public function creditCards(): HasManyThrough
+    {
+        return $this->hasManyThrough(
+            CreditCard::class,
+            Account::class,
+            Account::OWNER,
+            CreditCard::ACCOUNT,
+        );
+    }
+
+    protected function scopeUsersWithMostTransactionsAfter(
+        Builder $builder,
+        \DateTimeInterface $dateTime,
+    ): Builder {
+        return $builder
+            ->select(self::TABLE . '.*')
+            ->addSelect(DB::raw(
+                join('', [
+                    'count(',
+                    Transaction::TABLE,
+                    '.',
+                    Transaction::CREATED_AT,
+                    ') as transactions_count',
+                ]),
+            ))
+            ->join(
+                Account::TABLE,
+                fn(JoinClause $join) => $join->on(
+                    Account::OWNER,
+                    self::TABLE . '.' . self::PRIMARY_KEY,
+                ),
+            )->join(
+                CreditCard::TABLE,
+                fn(JoinClause $join) => $join->on(
+                    CreditCard::ACCOUNT,
+                    Account::TABLE . '.' . Account::PRIMARY_KEY,
+                ),
+            )->join(
+                Transaction::TABLE,
+                fn(JoinClause $join) => $join
+                    ->on(
+                        Transaction::SENDER_CARD,
+                        CreditCard::TABLE . '.' . Account::NUMBER,
+                    )
+                    ->orOn(
+                        Transaction::RECEIVER_CARD,
+                        CreditCard::TABLE . '.' . Account::NUMBER,
+                    ),
+            )->where(
+                Transaction::TABLE . '.' . Transaction::CREATED_AT,
+                '>=',
+                $dateTime,
+            )
+            ->groupBy(self::TABLE . '.' . Transaction::PRIMARY_KEY)
+            ->orderBy('transactions_count', 'desc');
     }
 }

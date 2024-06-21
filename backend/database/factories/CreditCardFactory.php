@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Account;
 use App\Models\CreditCard;
+use App\Support\Fakers\CardNumberFaker;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,15 +20,19 @@ class CreditCardFactory extends Factory
     public function definition(): array
     {
         return [
-            CreditCard::NUMBER => $this->faker->randomElement([
-                '2071-7733-4345-4332',
-                '5022-2943-8345-4302',
-            ]),
+            CreditCard::NUMBER => (new CardNumberFaker())->fake(),
             CreditCard::ACCOUNT => Account::factory(),
             CreditCard::EXPIRE_DATE => $this->faker->dateTimeBetween(
                 '+ 1 month',
                 '+ 5 years',
             )->format('Y-m-d'),
         ];
+    }
+
+    public function account(Account $account): static
+    {
+        return $this->state(fn() => [
+            CreditCard::ACCOUNT => $account->getKey(),
+        ]);
     }
 }

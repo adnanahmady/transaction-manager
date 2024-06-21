@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class CreditCard extends Model
 {
@@ -24,5 +25,21 @@ class CreditCard extends Model
         self::ACCOUNT,
     ];
 
-    public function scopeFindByNumber(): void {}
+    public function sends(): HasMany
+    {
+        return $this->hasMany(
+            Transaction::class,
+            Transaction::SENDER_CARD,
+            self::NUMBER,
+        );
+    }
+
+    public function receives(): HasMany
+    {
+        return $this->hasMany(
+            Transaction::class,
+            Transaction::RECEIVER_CARD,
+            self::NUMBER,
+        );
+    }
 }

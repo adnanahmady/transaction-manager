@@ -26,4 +26,9 @@ class AccountFactory extends Factory
             Account::OWNER => User::factory(),
         ];
     }
+
+    public function owner(User $owner): static
+    {
+        return $this->state(fn() => [Account::OWNER => $owner->getKey()]);
+    }
 }
