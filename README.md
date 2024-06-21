@@ -4,6 +4,9 @@ This application manages you bank accounts and cards,
 you can do your bank transactions and transfer money
 using this app.
 
+**Caution**: you can have an easy start by following 
+the [Installation](#install) section instruction.
+
 # Index
 
 Using bellow list you can jump to different
@@ -12,6 +15,7 @@ parts of the application.
 * [Requirements](#requirements)
 * [Commit Message Manual](#commit-message-manual)
 * [Make Commands](#make-commands)
+  * [Install](#install)
   * [Up](#up)
   * [Down](#down)
   * [Restart](#restart)
@@ -48,6 +52,20 @@ to develop easily.
 Bellow there are different prepared make commands
 so you can check the application without any 
 specific knowledge needed.
+
+## Install
+
+You can bring up and running the project using this command.
+This command will prepare the development environment for you
+to do your work.
+
+**Caution**: this command installs the composer packages, creates
+the `.env` file, and publishes the needed assets, and finally to
+make sure that everything is okay, it will run the application tests.
+
+```shell
+make install
+```
 
 ## Up
 

@@ -2,6 +2,10 @@ define default
 $(if $(1),$(1),$(2))
 endef
 
+define print
+@printf "\033[032;5;1m$(1)\033[0m\n"
+endef
+
 up:
 	@touch .backend/extra/history
 	@docker compose ${up-as} up $(call default,${up-with},-d)
@@ -32,6 +36,15 @@ ps:
 	@docker compose ps
 
 status: ps
+
+install:
+	cp .env.example .env
+	${MAKE} up
+	${MAKE} shell run="composer install"
+	${MAKE} shell run="composer run build"
+	${MAKE} shell run="php artisan migrate --seed"
+	${MAKE} test
+	$(call print,Everything is working fine!)
 
 test:
 	${MAKE} shell run="composer test"

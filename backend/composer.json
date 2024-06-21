@@ -44,6 +44,11 @@
             "phpcs -s --standard=$(pwd)/.phpcs.app.xml",
             "phpcs -s --standard=$(pwd)/.phpcs.tests.xml"
         ],
+        "build": [
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "@php artisan key:generate --ansi",
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
